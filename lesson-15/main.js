@@ -18,7 +18,7 @@ const mongoose = require("mongoose"); // Mongoose 모듈의 요청
 mongoose.Promise = global.Promise; // 필요 없을 것 같은데?
 
 mongoose.connect(
-  "mongodb://localhost:27017/recipe_db", // 데이터베이스 연결 설정
+  "mongodb+srv://eunji:LxwX3EaENwfXug92@ut-node.jbuqzp0.mongodb.net/?retryWrites=true&w=majority&appName=UT-Node", // 데이터베이스 연결 설정
   { useNewUrlParser: true }
 );
 
@@ -33,7 +33,7 @@ db.once("open", () => {
   console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
-app.set("port", process.env.PORT || port);
+app.set("port", process.env.PORT || port); 
 app.set("view engine", "ejs");
 
 app.use(layouts);
@@ -58,15 +58,15 @@ app.get("/name/:myName", homeController.respondWithName2);
  * 구독자 컨트롤러 사용
  */
 
-
+app.get("/subscribers", subscribersController.getAllSubscribers2);
 /**
  * @TODO: Listing 15.5 (p. 219-220)
  * 구독을 위한 라우트
  */
 // 구독 페이지를 위한 GET 라우트
-
+app.get("/subscribe", subscribersController.getSubscriptionPage);
 // 구독 데이터 처리를 위한 POST 라우트
-
+app.post("/subscribe", subscribersController.saveSubscriber);
 
 /**
  * Listing 11.4 (p. 169)
